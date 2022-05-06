@@ -1,1 +1,5 @@
-<p>synonym works!</p>
+<ul *ngIf="synonymResult && synonymResult.response.length > 0">
+    <li *ngFor="let synonym of synonymResult.response">
+      {{ synonym.list.synonyms }}
+    </li>
+  </ul>
