@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TranslateComponent } from './components/translate/translate.component';
 import { SynonymComponent } from './components/synonym/synonym.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TranslateComponent,
     SynonymComponent,
-    NavbarComponent
+    NavbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
