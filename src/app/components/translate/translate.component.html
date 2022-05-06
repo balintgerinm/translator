@@ -1,1 +1,5 @@
-<p>translate works!</p>
+<ul *ngIf="translates && translates.length > 0">
+  <li *ngFor="let translate of translates">
+    {{ translate.text }}
+  </li>
+</ul>
