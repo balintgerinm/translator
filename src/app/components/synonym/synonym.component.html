@@ -1,7 +1,13 @@
 <mat-card class="card">
-  <ul *ngIf="synonymResult && synonymResult.response.length > 0">
-    <li *ngFor="let synonym of synonymResult.response">
-      {{ synonym.list.synonyms }}
-    </li>
-  </ul>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile> </mat-grid-tile>
+
+      <ul *ngIf="synonymResult && synonymResult.response.length > 0">
+        <li *ngFor="let synonym of synonymResult.response">
+          {{ synonym.list.synonyms }}
+        </li>
+      </ul>
+    </mat-grid-list>
+  </mat-card-content>
 </mat-card>

@@ -1,53 +1,94 @@
 <mat-card class="card">
   <mat-card-title>Choose languages to translate word</mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="3" rowHeight="2:1">
-      <mat-grid-tile>
-        <mat-form-field appearance="fill">
-          <mat-label>Select from</mat-label>
-          <mat-select disableRipple>
-            <mat-option value="1">Option 1</mat-option>
-            <mat-option value="2">Option 2</mat-option>
-            <mat-option value="3">Option 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <mat-icon class="arrow">arrow_forward</mat-icon>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <mat-form-field appearance="fill">
-          <mat-label>Select to</mat-label>
-          <mat-select disableRipple>
-            <mat-option value="1">Option 1</mat-option>
-            <mat-option value="2">Option 2</mat-option>
-            <mat-option value="3">Option 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <form class="example-form">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Word:</mat-label>
-            <input matInput maxlength="256" />
+    <form #translate="ngForm">
+      <mat-grid-list class="form-group" cols="3" rowHeight="2:1">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label for="fromLanguage">From</mat-label>
+            <mat-select
+              
+              disableRipple
+              id="fromLanguage"
+              class="form-control"
+              required
+              [(ngModel)]="model.fromLanguage"
+              name="fromLanguage"
+              #fromLanguage="ngModel"
+              *ngIf="fromL && fromL.length > 0"
+              (selectionChange)="filterLanguages(model.fromLanguage)"
+            >
+              <mat-option matInput *ngFor="let lang of fromL" [value]="lang">
+                {{ lang }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-        </form>
-      </mat-grid-tile>
+        </mat-grid-tile>
 
-      <mat-grid-tile>
-        <button mat-raised-button color="primary">Go!</button>
-      </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-icon class="arrow">arrow_forward</mat-icon>
+        </mat-grid-tile>
 
-      <mat-grid-tile>
-        <ul *ngIf="translates && translates.length > 0">
-          <li *ngFor="let translate of translates">
-            {{ translate.text }}
-          </li>
-        </ul>
-      </mat-grid-tile>
-    </mat-grid-list>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label for="toLanguage">To</mat-label>
+            <mat-select
+              
+              disableRipple
+              id="toLanguage"
+              class="form-control"
+              required
+              [(ngModel)]="model.toLanguage"
+              name="toLanguage"
+              #toLanguage="ngModel"
+            >
+              <mat-option matInput *ngFor="let fil of filteredL" [value]="fil">
+                {{ fil }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label for="word">Word:</mat-label>
+            <input
+              type="text"
+              id="word"
+              matInput
+              required
+              maxlength="256"
+              [(ngModel)]="model.word"
+              name="word"
+            />
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <button
+            matInput
+            type="submit"
+            (click)="
+              translateOne(
+                model.fromLanguage + '-' + model.toLanguage,
+                model.word
+              )
+            "
+            mat-raised-button
+            color="primary"
+          >
+            Go!
+          </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <ul *ngIf="translates && translates.length > 0">
+            <li *ngFor="let translate of translates">
+              {{ translate.text }}
+            </li>
+          </ul>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
   </mat-card-content>
 </mat-card>
