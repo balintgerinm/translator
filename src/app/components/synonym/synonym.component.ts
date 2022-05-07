@@ -11,11 +11,25 @@ import { SynonymService } from 'src/app/services/synonym.service';
 export class SynonymComponent implements OnInit {
   synonymResult?: SynonymResult;
   languages: string[] = [
-    'cs_CZ', 'da_DK', 'de_CH', 'de_DE', 'en_US', 'el_GR', 'es_ES', 'fr_FR',
-    'hu_HU', 'it_IT', 'no_NO', 'pl_PL', 'pt_PT', 'ro_RO', 'ru_RU', 'sk_SK'
-  ]
+    'cs_CZ',
+    'da_DK',
+    'de_CH',
+    'de_DE',
+    'en_US',
+    'el_GR',
+    'es_ES',
+    'fr_FR',
+    'hu_HU',
+    'it_IT',
+    'no_NO',
+    'pl_PL',
+    'pt_PT',
+    'ro_RO',
+    'ru_RU',
+    'sk_SK',
+  ];
 
-  model = new Synonym('','');
+  model = new Synonym('', '');
 
   constructor(private synonymService: SynonymService) {}
 
@@ -34,9 +48,10 @@ export class SynonymComponent implements OnInit {
   }
 
   onSubmit() {
-    this.synonym(
-      this.model.text,
-      this.model.language
-    )
+    try {
+      this.synonym(this.model.text, this.model.language);
+    } catch (error) {
+      alert("Synonyms not found for this expression!")
+    }
   }
 }
