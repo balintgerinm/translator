@@ -15,13 +15,11 @@ export class TranslateComponent implements OnInit {
   filteredL: string[] = [];
 
   model = new Translation('', '', '');
-  submitted = false;
 
   constructor(private translateService: TranslateService) {}
 
   ngOnInit(): void {
     this.getLanguages();
-    
   }
 
   translateOne(lang: string, text: string) {
@@ -48,14 +46,12 @@ export class TranslateComponent implements OnInit {
   }
 
   filterLanguages(key: string) {
-    console.log(key);
     this.filteredL = [];
     this.languages!.forEach((element) => {
       if (element.split('-')[0] == key) {
         this.filteredL.push(element.split('-')[1]);
       }
     });
-    console.log(this.filteredL);
   }
 
   onSubmit() {
@@ -63,9 +59,5 @@ export class TranslateComponent implements OnInit {
       this.model.fromLanguage + '-' + this.model.toLanguage,
       this.model.word
     )
-  }
-
-  alert(){
-    alert(this.model.toLanguage);
   }
 }

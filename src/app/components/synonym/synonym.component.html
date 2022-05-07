@@ -1,13 +1,49 @@
-<mat-card class="card">
-  <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile> </mat-grid-tile>
+<form #synonym="ngForm" (submit)="onSubmit()">
+  <mat-card class="card">
+    <mat-card-title>Search a word for synonyms</mat-card-title>
+    <mat-card-content>
+      <div class="row">
+        <mat-form-field appearance="fill">
+          <mat-label for="language">Language</mat-label>
+          <mat-select
+            [(ngModel)]="model.language"
+            id="language"
+            class="form-control"
+            required
+            name="language"
+            *ngIf="languages && languages.length > 0"
+          >
+            <mat-option *ngFor="let lang of languages" [value]="lang">
+              {{ lang }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
+        <span class="spacer"></span>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="text">Expression</mat-label>
+          <input
+            matInput
+            type="text"
+            id="text"
+            required
+            maxlength="64"
+            [(ngModel)]="model.text"
+            name="text"
+          />
+        </mat-form-field>
+        <span class="spacer"></span>
+
+        <button matInput type="submit" mat-raised-button color="primary">
+          Go!
+        </button>
+      </div>
       <ul *ngIf="synonymResult && synonymResult.response.length > 0">
         <li *ngFor="let synonym of synonymResult.response">
           {{ synonym.list.synonyms }}
         </li>
       </ul>
-    </mat-grid-list>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</form>
