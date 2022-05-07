@@ -14,13 +14,14 @@ export class TranslateComponent implements OnInit {
   fromL: string[] = [];
   filteredL: string[] = [];
 
-  model = new Translation('en', 'de', '');
+  model = new Translation('', '', '');
   submitted = false;
 
   constructor(private translateService: TranslateService) {}
 
   ngOnInit(): void {
     this.getLanguages();
+    
   }
 
   translateOne(lang: string, text: string) {
@@ -58,6 +59,13 @@ export class TranslateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    this.translateOne(
+      this.model.fromLanguage + '-' + this.model.toLanguage,
+      this.model.word
+    )
+  }
+
+  alert(){
+    alert(this.model.toLanguage);
   }
 }

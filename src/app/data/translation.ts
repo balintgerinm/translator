@@ -3,5 +3,5 @@ export class Translation {
       public fromLanguage: string,
       public toLanguage: string,
       public word: string
-  ) {}
+  ) {} 
 }
