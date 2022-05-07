@@ -2,8 +2,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
-    margin-left: 60px;
-    margin-right: 60px;
+    max-width: 800px;
 }
 
 .res {

@@ -33,9 +33,7 @@ export class SynonymComponent implements OnInit {
 
   constructor(private synonymService: SynonymService) {}
 
-  ngOnInit(): void {
-    //this.synonym('future', 'en_US');
-  }
+  ngOnInit(): void {}
 
   synonym(word: string, language: string) {
     this.synonymService
@@ -51,7 +49,7 @@ export class SynonymComponent implements OnInit {
     try {
       this.synonym(this.model.text, this.model.language);
     } catch (error) {
-      alert("Synonyms not found for this expression!")
+      alert('Synonyms not found for this expression!');
     }
   }
 }

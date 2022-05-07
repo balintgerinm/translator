@@ -41,7 +41,7 @@
       </div>
       <ul *ngIf="synonymResult && synonymResult.response.length > 0">
         <li *ngFor="let synonym of synonymResult.response">
-          {{ synonym.list.synonyms }}
+          {{ synonym.list.synonyms.split('|').join(', ') }}
         </li>
       </ul>
     </mat-card-content>
