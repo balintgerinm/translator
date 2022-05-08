@@ -9,6 +9,10 @@ export class PageNotFoundComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * first-to-call function
+   * not found page has no functionality at this point
+   */
   ngOnInit(): void {
   }
 

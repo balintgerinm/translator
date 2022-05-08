@@ -33,8 +33,18 @@ export class SynonymComponent implements OnInit {
 
   constructor(private synonymService: SynonymService) {}
 
+  /**
+   * first-to-call function
+   * synonym page has no needed functionality at this point
+   */
   ngOnInit(): void {}
 
+  /**
+   * Async function for getting synonyms
+   * it subscribes the synonym api call and perform asynchronicity
+   * @param word search expression
+   * @param language given language in which we search
+   */
   synonym(word: string, language: string) {
     this.synonymService
       .synonym(word, language)
@@ -45,6 +55,10 @@ export class SynonymComponent implements OnInit {
       });
   }
 
+  /**
+   * Callback function called when user submits the form
+   * It alerts when the called synonym function throws an error
+   */
   onSubmit() {
     try {
       this.synonym(this.model.text, this.model.language);

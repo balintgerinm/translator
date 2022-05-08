@@ -13,6 +13,12 @@ export class SynonymService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /** 
+   * Async function for getting synonyms using the api
+   * @param word Expression string we are looking for
+   * @param language The given language we use
+   * @returns SynonymResult or throws error
+   */
   synonym(word: string, language: string): Observable<SynonymResult> {
     return this.httpClient
       .get<SynonymResult>(
