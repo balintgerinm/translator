@@ -57,13 +57,8 @@ export class SynonymComponent implements OnInit {
 
   /**
    * Callback function called when user submits the form
-   * It alerts when the called synonym function throws an error
    */
   onSubmit() {
-    try {
-      this.synonym(this.model.text, this.model.language);
-    } catch (error) {
-      alert('Synonyms not found for this expression!');
-    }
+    this.synonym(this.model.text, this.model.language);
   }
 }

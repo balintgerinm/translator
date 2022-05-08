@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { SynonymResult } from '../interfaces/synonym-result';
 
 @Injectable({
@@ -13,11 +13,11 @@ export class SynonymService {
 
   constructor(private httpClient: HttpClient) {}
 
-  /** 
+  /**
    * Async function for getting synonyms using the api
    * @param word Expression string we are looking for
    * @param language The given language we use
-   * @returns SynonymResult or throws error
+   * @returns SynonymResult or disolay an alert dialog
    */
   synonym(word: string, language: string): Observable<SynonymResult> {
     return this.httpClient
@@ -26,8 +26,9 @@ export class SynonymService {
       )
       .pipe(
         catchError((error) => {
-          //alert(error.message);
-          return throwError(() => error);
+          alert('Synonyms not found for this expression!');
+          let synonymResult: SynonymResult = { response: [] };
+          return of(synonymResult);
         })
       );
   }
