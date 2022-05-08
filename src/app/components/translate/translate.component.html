@@ -73,12 +73,10 @@
 
         <mat-grid-tile>
           <mat-card class="res">
-            <mat-card-content>
-              <ul *ngIf="translates && translates.length > 0">
-                <li *ngFor="let translate of translates">
-                  {{ translate.text }}
-                </li>
-              </ul>
+            <mat-card-content *ngIf="translates && translates.length > 0">
+              <label *ngFor="let translate of translates">
+                {{ translate.text + "," }}
+              </label>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
