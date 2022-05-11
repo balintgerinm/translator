@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Synonym } from 'src/app/data/synonym';
 import { SynonymResult } from 'src/app/interfaces/synonym-result';
 import { SynonymService } from 'src/app/services/synonym.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-synonym',
@@ -31,13 +32,18 @@ export class SynonymComponent implements OnInit {
 
   model = new Synonym('', '');
 
-  constructor(private synonymService: SynonymService) {}
+  constructor(
+    private synonymService: SynonymService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   /**
    * first-to-call function
-   * synonym page has no needed functionality at this point
+   * Set the last synonym fields on the form
    */
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.model = this.localStorageService.getSynonym('lastSynonym');
+  }
 
   /**
    * Async function for getting synonyms
@@ -52,6 +58,8 @@ export class SynonymComponent implements OnInit {
         if (synonymResult.response.length > 0) {
           this.synonymResult = synonymResult;
         }
+        this.localStorageService.removeItem('lastSynonym');
+        this.localStorageService.setSynonym('lastSynonym', this.model);
       });
   }
 

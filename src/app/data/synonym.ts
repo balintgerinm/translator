@@ -3,8 +3,13 @@
  * It contains the search parameters for getting synonyms
  */
 export class Synonym {
-    constructor(
-        public language: string,
-        public text: string
-    ) {}
+  constructor(public language: string, public text: string) {}
+
+  getLanguage(): string {
+    return this.language;
+  }
+
+  getText(): string {
+    return this.text;
+  }
 }

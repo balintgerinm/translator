@@ -14,7 +14,7 @@ export class LocalStorageService {
    * @param data The Synonym object to save
    */
   public setSynonym(key: string, data: Synonym) {
-    localStorage.setItem(key, JSON.stringify(Synonym));
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
   /**
@@ -39,7 +39,7 @@ export class LocalStorageService {
    * @param data The Translation object to save
    */
   public setTranslation(key: string, data: Translation) {
-    localStorage.setItem(key, JSON.stringify(Translation));
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
   /**
@@ -53,11 +53,11 @@ export class LocalStorageService {
     if (localData != null) {
       translation = JSON.parse(localData);
     } else {
-      translation = new Translation('', '','');
+      translation = new Translation('', '', '');
     }
     return translation;
   }
-  
+
   /**
    * This function removes a unique item from localstorage
    * @param key The identifier of the removable object
@@ -71,5 +71,5 @@ export class LocalStorageService {
    */
   public clear() {
     localStorage.clear();
-  }  
+  }
 }

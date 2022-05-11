@@ -4,7 +4,7 @@
     <form #translate="ngForm" (submit)="onSubmit()">
       <mat-grid-list class="form-group" cols="3" rowHeight="2:1">
         <mat-grid-tile>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" *ngIf="fromL && fromL.length > 0">
             <mat-label for="fromLanguage">From</mat-label>
             <mat-select
               [(ngModel)]="model.fromLanguage"
@@ -12,8 +12,8 @@
               class="form-control"
               required
               name="fromLanguage"
-              *ngIf="fromL && fromL.length > 0"
               (selectionChange)="filterLanguages(model.fromLanguage)"
+              [(value)]="model.fromLanguage"
             >
               <mat-option matInput *ngFor="let lang of fromL" [value]="lang">
                 {{ lang }}
@@ -31,6 +31,7 @@
             <mat-label for="toLanguage">To</mat-label>
             <mat-select
               [(ngModel)]="model.toLanguage"
+              [(value)]="model.toLanguage"
               name="toLanguage"
               id="toLanguage"
               class="form-control"

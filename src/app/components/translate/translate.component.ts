@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateResult, Tr } from 'src/app/interfaces/translate-result';
 import { TranslateService } from 'src/app/services/translate.service';
 import { Translation } from 'src/app/data/translation';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-translate',
@@ -16,14 +17,19 @@ export class TranslateComponent implements OnInit {
 
   model = new Translation('', '', '');
 
-  constructor(private translateService: TranslateService) {}
+  constructor(
+    private translateService: TranslateService,
+    private localStorageService: LocalStorageService
+  ) {
+    this.getLanguages();
+  }
 
   /**
    * first-to-call function
-   * Allows the languages to the form
+   * Set the last translation fields on the form
    */
   ngOnInit(): void {
-    this.getLanguages();
+    this.model = this.localStorageService.getTranslation('lastTranslation');
   }
 
   /**
@@ -40,6 +46,8 @@ export class TranslateComponent implements OnInit {
         if (translateResult.def.length > 0) {
           this.translates = translateResult.def[0].tr;
         }
+        this.localStorageService.removeItem('lastTranslation');
+        this.localStorageService.setTranslation('lastTranslation', this.model);
       });
   }
 
@@ -68,7 +76,7 @@ export class TranslateComponent implements OnInit {
    */
   filterLanguages(key: string) {
     this.filteredL = [];
-    this.languages!.forEach((element) => {
+    this.languages?.forEach((element) => {
       if (element.split('-')[0] == key) {
         this.filteredL.push(element.split('-')[1]);
       }
@@ -83,6 +91,6 @@ export class TranslateComponent implements OnInit {
     this.translateOne(
       this.model.fromLanguage + '-' + this.model.toLanguage,
       this.model.word
-    )
+    );
   }
 }
