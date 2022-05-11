@@ -20,16 +20,17 @@ export class TranslateComponent implements OnInit {
   constructor(
     private translateService: TranslateService,
     private localStorageService: LocalStorageService
-  ) {
-    this.getLanguages();
-  }
+  ) {}
 
   /**
    * first-to-call function
-   * Set the last translation fields on the form
+   * get languages
+   * Set the last translation word field on the form
    */
   ngOnInit(): void {
-    this.model = this.localStorageService.getTranslation('lastTranslation');
+    this.getLanguages();
+    let data = this.localStorageService.getTranslation('lastTranslation');
+    this.model.word = data.word;
   }
 
   /**
